@@ -1,5 +1,6 @@
 """
-Author: Shannon Hoy
+Author: Shannon Hoy, based on script by ('MaxU on stackoverflow:
+        https://stackoverflow.com/questions/36671176/reading-a-complicated-csv-file-with-python)
 Date: Fall 2018
 
 This function takes a V1.0 Argus data file (.arg) and stores the header information into an
@@ -37,8 +38,17 @@ import pprint as pp
 
 fn = r"/home/mapper/Documents/Python/Baltimore/BaltimoreData/ArgusData/2014-05-29_ARGUS_Baltimore.arg"
 
-def parse_header(filename)
-    """"""
+
+def parse_header(filename):
+
+    """
+      This function parses the information from the header rows of the .arg file and saves it into a 'defaultdict',
+      and generates 'skiprow' list for pandas.read_csv()'. It breaks after parsing the header, so the data block will not
+      be read into memory.
+
+      returns: parsed header info as defaultdict object, and skipped rows list
+
+    """
 
 
 
