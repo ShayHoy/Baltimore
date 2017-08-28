@@ -28,11 +28,11 @@ Output Data Format:
 
 # IMPORT NECESSARY PACKAGES
 
-from collections import defaultdict
-import io
-import re
 import pandas as pd
-import pprint as pp
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 # PARSE FILE
 
@@ -50,7 +50,7 @@ def parse_header(filename):
 
     """
 
-    # useful header information that will be saved into defaultdict
+    # useful header information that will be saved into a list
 
 
     with open(fn) as f:
@@ -79,7 +79,11 @@ print(type(data))
 print(header)
 print(data.tail(n=10))
 
+# plot overall map
 
+map = Basemap(projection='merc', llcrnrlat=38.9, llcrnrlon=-77, urcrnrlat=39.4, urcrnrlon=-76, lat_ts=39.2)
+map.bluemarble()
+plt.show()
 
 
 
