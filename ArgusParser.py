@@ -50,11 +50,38 @@ def parse_header(filename):
 
     """
 
+    # useful header information that will be saved into defaultdict
+
+
+    with open(fn) as f:
+        header = list
+        i = 0
+        skiprows = []
+        start = False
+        while start:
+            for line in f:
+                if line.startswith('DATA'):
+                    skiprows.append(i)
+                    break
+                else:
+                    skiprows.append(i)
+                    header.append(list(line))
+                i = i+1
 
 
 
 
-Data = pd.read_csv('/home/mapper/Documents/Python/Baltimore/BaltimoreData/ArgusData/2014-05-29_ARGUS_Baltimore.csv', header=[0,1])
+
+
+
+
+
+
+
+
+
+
+
 
 
 
