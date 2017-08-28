@@ -54,19 +54,35 @@ def parse_header(filename):
 
 
     with open(fn) as f:
-        header = list
+        header = []
         i = 0
         skiprows = []
-        start = False
-        while start:
-            for line in f:
+        for line in f:
+                line = line.strip()
                 if line.startswith('DATA'):
                     skiprows.append(i)
                     break
                 else:
                     skiprows.append(i)
-                    header.append(list(line))
+                    header.append(line)
                 i = i+1
+        return header, skiprows
+
+
+header, skiprows = parse_header(fn)
+
+# parses data block and skips the header
+
+data = pd.read_csv(fn, header=None, skiprows=skiprows)
+
+print(type(data))
+print(header)
+print(data.tail(n=10))
+
+
+
+
+
 
 
 
