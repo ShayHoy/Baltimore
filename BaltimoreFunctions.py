@@ -74,7 +74,25 @@ def argus_header(filename):
     return header
 
 
+def simplexy(dataframe):
 
+    x = dataframe['Long']
+    y = dataframe['Lat']
+
+    map = Basemap(projection='merc', lat_0=39.30, lon_0=-76.595,
+                  resolution='h', area_thresh=0.1,
+                  llcrnrlon=-76.7, llcrnrlat=39.18,
+                  urcrnrlon=-76.4, urcrnrlat=39.3)
+
+    map.drawcoastlines()
+    map.drawcountries()
+    map.fillcontinents(color='green')
+    map.drawmapboundary()
+    map.scatter(x, y)
+    map.drawmeridians(np.arange(0, 360, 30))
+    map.drawparallels(np.arange(-90, 90, 30))
+
+    plt.show()
 
 
 
