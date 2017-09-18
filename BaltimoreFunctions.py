@@ -19,7 +19,9 @@ from shapely.geometry import Point
 import numpy as np
 import time
 from scipy import ndimage
-
+import folium as fo
+import flask
+from flask import Flask
 
 
 # PARSE FILE ARGUS DATA
@@ -127,8 +129,6 @@ def simplexy(dataframe):
 
 def simple_heatmap(dataframe, bins=(100, 100), smoothing=1.3, cmap='jet'):
 
-    start = time.clock()
-
     def getx(pt):
         return pt.coords[0][0]
 
@@ -146,10 +146,16 @@ def simple_heatmap(dataframe, bins=(100, 100), smoothing=1.3, cmap='jet'):
 
     plt.imshow(logheatmap, cmap=cmap, extent=extent)
     plt.colorbar()
-    plt.gca().invert_yxis()
     plt.show()
 
-    print(time.clock(), "seconds process time")
+
+def folium_heat():
+
+    app = Flask(__name__)
+
+    map = fo.Map(location=[39.2858, -76.6131], tiles='cartodbdark_matter')
+    map.save('/home/mapper/Documents/Python/Baltimore/Maps/test.html')
+
 
 
 
