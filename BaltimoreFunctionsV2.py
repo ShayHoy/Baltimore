@@ -1,7 +1,8 @@
 import geopandas as gpd
 import pandas as pd
-from shapely.geometry import Point
+from shapely.geometry import Point, LineString
 import os
+import folium as fo
 
 fp = '/home/mapper/Documents/Python/Baltimore/BaltimoreData/ArgusData/2014-05-29_ARGUS_Baltimore.arg'
 
@@ -29,7 +30,19 @@ outFolder = r"/home/mapper/Documents/Python/Baltimore/BaltimoreData/ArgusShapefi
 for key, values in grouped:
     name = key.replace(' ', '_')
     name = name.replace('-', '_')
-    outName = "%s.shp" % name
-    print('Processing: %s' % name)
+    outName = "%s_POINTS.shp" % name
     outPath = os.path.join(outFolder, outName)
-    values.to_file(outPath)
+    if not os.path.exists(outPath):
+        values.to_file(outPath)
+        print('Processed: %s' % name)
+
+# Turn Points into Lines
+# Aggregate these points with the GroupBy
+# Aggregate these points with the GroupBy
+baltimore_group = baltimore_geoDF.groupby(['VesselID'])['geometry'].apply(lambda x: LineString(x.tolist()))
+baltimore_group = gpd.GeoDataFrame(baltimore_group, geometry='geometry')
+
+# Plot Lines in Folium
+map = fo.Map(location=[39.2858, -76.6131], tiles='cartodbdark_matter')
+map.save('/home/mapper/Documents/Python/Baltimore/Maps/test.html')
+
